@@ -1,0 +1,115 @@
+const canvas = document.getElementById('flappyCanvas');
+const ctx = canvas.getContext('2d');
+
+var frames =0;
+
+//images
+const ship = {
+    pic: document.querySelector('#ship>img'),
+    width: 236,
+    height: 130,
+    x: 100,
+    y: 1000,
+    speed:1,
+    gravity: 1,
+    jump: 20,
+    fly: function(){
+        this.speed= -(this.jump);
+        // this.y+=this.speed;
+    },
+    draw: function(){
+        ship.pic.style.zIndex = "3";
+        ctx.drawImage(ship.pic,this.x,this.y,this.width,this.height );
+    },
+    update: function(){
+        this.speed+=this.gravity;
+        this.y+=this.speed;
+
+        if(this.y+this.height>=canvas.height-ftr.height+(this.height*0.45))
+        {
+            this.y=canvas.height-ftr.height;
+        }
+    }
+};
+
+const obs = {
+    pic: document.querySelector('#obstacle>img'),
+    width: 418,
+    height: 2792,
+    x: 600,
+    y: -461,
+    update: function(){
+
+    },
+    draw: function(){
+        ctx.drawImage(obs.pic,this.x,this.y,this.width,this.height );
+    }
+};
+
+const ring = {
+    pic: document.querySelector('#ring>img'),
+    width: 280,
+    height: 500,
+    x: 700,
+    y: 801,
+    draw: function(){
+        ctx.drawImage(ring.pic,this.x,this.y,this.width,this.height );
+    }
+};
+
+const bg = {
+    pic: document.querySelector('#back>img'),
+    width: 1080,
+    height: 1920,
+    x: 0,
+    y: 0,
+    draw: function(){
+        ctx.drawImage(bg.pic,this.x,this.y,this.width,this.height );
+    }
+};
+
+const ftr = {
+    pic: document.querySelector('#footer>img'),
+    width: 1080,
+    height: 235,
+    x: 0,
+    y: 1685,
+    draw: function(){
+        ctx.drawImage(ftr.pic,this.x,this.y,this.width,this.height );
+    }
+};
+
+
+
+
+
+
+
+function draw(){
+    bg.draw();
+    obs.draw();
+    ship.draw();
+    ring.draw();
+    ftr.draw();
+}
+
+function update(){
+
+    ship.update();
+}
+
+function loop(){
+    update();
+    draw();
+    frames++;
+    
+
+
+    requestAnimationFrame(loop);
+}
+
+loop();
+canvas.addEventListener('click', function(evt){
+    ship.fly();
+});
+
