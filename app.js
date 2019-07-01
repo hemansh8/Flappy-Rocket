@@ -20,7 +20,7 @@ const score={
 
 
 function roundOver(){
-    document.getElementById('swoosh').playbackRate = 10;
+    document.getElementById('roundEnd').playbackRate = 1;
     document.getElementById('roundEnd').play();
 }
 
